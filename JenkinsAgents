@@ -19,7 +19,7 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				echo 'Deploying into Dev environment'
-        echo 'rsync'
+        			sh 'cp -r $WORKSPACE/target/*.war /opt/tomcat/apache-tomcat/webapps/'
 			}
 		}
 	}
