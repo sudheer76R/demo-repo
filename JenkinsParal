@@ -2,17 +2,17 @@ pipeline {
 	agent none 
 	stages {
 		stage('Stage-1') {
-      agent {label 'master'}
+      			agent {label 'master'}
 			steps {
 				sh 'touch master'
-        sh 'mkdir master-1'
+       				 sh 'mkdir master-1'
 			}
 		}
 		stage('Deploy') {
-      agent {label 'java_node'}
+    			  agent {label 'java_node'}
 			steps {
 				sh '''touch java_node
-              mkdir java_node_1'''
+             			 mkdir java_node_1'''
 			}
 		}
 	}
