@@ -1,9 +1,13 @@
 pipeline {
     agent any
+    environment {
+        name='ArtisanTek'
+    }
     stages {
         stage('Variables_Demo') {
             steps {
                 echo "Job ${env.JOB_NAME} is running on ${env.JENKINS_URL} and having build no: ${env.BUILD_ID}"
+                echo "Name is: ${name}"
             }
         }
     }
