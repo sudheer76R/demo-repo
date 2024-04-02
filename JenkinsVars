@@ -3,6 +3,11 @@ pipeline {
     environment {
         name='ArtisanTek'
     }
+    parameters {
+      string(defaultValue: 'Jenkins', description: 'Enter your ID', name: 'USER_ID')
+      booleanParam(defaultValue: true, name: 'MyBoolValue')
+      choice(choices: ['DEV', 'TEST', 'PROD', 'UAT'], description: 'Choose from above options', name: 'ENV')
+    }
     stages {
         stage('Variabl_TopLevel') {
            environment {
@@ -12,6 +17,9 @@ pipeline {
                 echo "Job ${env.JOB_NAME} is running on ${env.JENKINS_URL} and having build no: ${env.BUILD_ID}"
                 echo "Name is: ${name}"
                 echo "Place is: ${place}"
+                echo "User ID is: ${USER_ID}"
+                echo "Boolean value: ${MyBoolValue}"
+                echo "Choice is: ${{ENV}"
             }
         }
         stage('Variables_StageLevel') {
