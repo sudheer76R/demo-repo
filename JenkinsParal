@@ -1,15 +1,20 @@
 pipeline {
 	agent none 
-	triggers {
-		cron '* * * * * '
-		upstream 'pipeline-demo'
-	}
+	
 	stages {
-		stage('Stage-1') {
+		stage('ParallelJobs') {
       			agent {label 'master'}
-			steps {
-				sh 'sleep 60'
-       				echo 'sh mkdir master-1'
+			parallel {
+			stage(Stage-1A){
+                             steps {
+				sh 'sleep 120'
+			     }
+			}
+			stage(Stage-1B){
+                             steps {
+				sh 'sleep 120'
+			     }
+			}		
 			}
 		}
 		stage('Deploy') {
