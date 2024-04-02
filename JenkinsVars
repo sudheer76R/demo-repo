@@ -19,7 +19,7 @@ pipeline {
                 echo "Place is: ${place}"
                 echo "User ID is: ${USER_ID}"
                 echo "Boolean value: ${MyBoolValue}"
-                echo "Choice is: ${{ENV}"
+                echo "Choice is: ${ENV}"
             }
         }
         stage('Variables_StageLevel') {
