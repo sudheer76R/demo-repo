@@ -1,15 +1,17 @@
 pipeline {
-	agent {label 'java_node'}
+	agent none
 	
 	stages {
 		stage('ParallelJobs') {
 			parallel {
 			stage('Stage-1A'){
+			     agent {label 'java_node'}
                              steps {
 				sh 'sleep 120'
 			     }
 			}
 			stage('Stage-1B'){
+			     agent {label 'master'}
                              steps {
 				sh 'sleep 120'
 			     }
@@ -17,6 +19,7 @@ pipeline {
 			}
 		}
 		stage('Deploy') {
+			agent {label 'master'}
 			steps {
        				echo 'sh mkdir master-1'
 			}
