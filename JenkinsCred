@@ -2,12 +2,16 @@ pipeline {
     agent any
     environment {
         JENKINS_DEMO=credentials('DEMO_SECRET')
+        GITHUB_CRED=credentials('github_sp')
     }
     stages {
         stage('Hello') {
             steps {
                 echo 'Hello World'
                 sh 'echo "My secret cred is: ${JENKINS_DEMO}"'
+                sh 'echo "My Github cred USERNAMR:PASSWORD: ${GITHUB_CRED}"'
+                sh 'echo "My Github user : ${GITHUB_CRED_USR}"'
+                sh 'echo "My Github passweord is: ${GITHUB_CRED_PSW}"'
             }
         }
     }
