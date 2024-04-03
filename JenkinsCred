@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    environment {
+        JENKINS_DEMO=credentials('DEMO_SECRET')
+    }
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+                echo 'My secret cred is: ${JENKINS_DEMO}'
+            }
+        }
+    }
+}
