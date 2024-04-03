@@ -15,8 +15,9 @@ pipeline {
 			}
 		}
 		stage('Build') {
-			when {
-				branch "main"				
+			input {
+				message "Should we continue?"
+				ok "Yes!!!"
 			}
 			steps {
 				sh 'echo "Building the code"'
