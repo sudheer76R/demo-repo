@@ -1,5 +1,8 @@
 pipeline {
-	agent any 	
+	agent any
+    parameters {
+		choice(name: 'DEPLOY_TO', choices: ['DEV', 'QA', 'PROD'])
+	} 	
 	stages {
 		stage('Checkout') {
 			steps {
@@ -12,17 +15,21 @@ pipeline {
 			}
 		}
 		stage('Build') {
-      when {
-        branch "master"
-      }
+			when {
+				branch "main"				
+			}
 			steps {
 				sh 'echo "Building the code"'
 			}
 		}
 		stage('Deploy') {
+			when {
+				environment name: 'DEPLOY_TO', value: 'PROD'
+			}
 			steps {
 				echo 'Deploying into environment'
 			}
 		}
 	}
 }
+
