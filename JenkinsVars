@@ -3,7 +3,7 @@ pipeline {
     options {
       timestamps()
       retry(3)
-      timeout(3)
+      timeout(time: 3, unit: 'MINUTES')
     }
     environment {
         name='ArtisanTek'
