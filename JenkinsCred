@@ -7,7 +7,7 @@ pipeline {
         stage('Hello') {
             steps {
                 echo 'Hello World'
-                echo "My secret cred is: ${JENKINS_DEMO}"
+                sh 'echo "My secret cred is: ${JENKINS_DEMO}"'
             }
         }
     }
