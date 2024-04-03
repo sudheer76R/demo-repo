@@ -2,6 +2,8 @@ pipeline {
     agent any
     options {
       timestamps()
+      retry(3)
+      timeout(3)
     }
     environment {
         name='ArtisanTek'
@@ -23,6 +25,7 @@ pipeline {
                 echo "User ID is: ${params.USER_ID}"
                 echo "Boolean value: ${params.MyBoolValue}"
                 echo "Choice is: ${params.ENV}"
+                sh 'sleep 300'
             }
         }
         stage('Variables_StageLevel') {
