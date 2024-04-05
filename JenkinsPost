@@ -1,0 +1,50 @@
+pipeline {
+	agent any 
+	
+	stages {
+		stage('Checkout') {
+			steps {
+				git branch: 'main', url: 'https://github.com/sudheer76R/java-example.git'
+			}
+		}
+
+		stage('Static-test') {
+			steps {
+				echo 'Running static tests on code'
+			}
+			post {
+				failure {
+						mail 
+				}
+			}
+		}
+		
+
+		stage('Build') {
+			steps {
+				sh 'mvn clean package'
+			}
+		}
+
+		stage('Deploy') {
+			steps {
+				echo 'Deploying into Dev environment'
+			}
+		}
+
+	}
+	post {
+		always {
+				mail
+		}
+		success {
+				mail
+		}
+		fialure {
+				mail
+		}
+		unstable {
+				mail
+		}
+	}
+}
