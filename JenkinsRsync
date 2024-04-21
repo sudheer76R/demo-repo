@@ -2,7 +2,7 @@ pipeline {
 	agent none
 	stages {
 		stage('Checkout') {
-      agent {label 'master'}
+                        agent {label 'master'}
 			steps {
 				git branch: 'main', url: 'https://github.com/sudheer76R/java-example.git'
 			}
@@ -19,9 +19,9 @@ pipeline {
 		}
 		stage('Deploy') {
 			steps {
-        agent {label 'tomcatsp'}
+                        	agent {label 'tomcatsp'}
 				echo 'Deploying into Dev environment'
-        sh 'cp -r $WORKSPACE/target/*.war /opt/tomcat/apache-tomcat/webapps/'
+				sh 'rsync -avzh root@52.66.202.174:$WORKSPACE/target/*.war /opt/tomcat/apache-tomcat/webapps/'
 			}
 		}
 	}
