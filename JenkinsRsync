@@ -14,16 +14,21 @@ pipeline {
 			}
 		}
 		stage('Build') {
+		    environment {
+                private_key=credentials('ssh_key')
+            }
 			agent {label 'master'}
 			steps {
 				sh 'mvn clean package'
+				sh 'rsync -avzh -e "ssh -i ${private_key} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" $WORKSPACE/target/*.war ubuntu@13.234.115.8:/home/ubuntu'
 			}
 		}
 		stage('Deploy') {
+		    agent {label 'tomcatsp'}
 			steps {
-                        	agent {label 'tomcatsp'}
 				echo 'Deploying into Dev environment'
-				sh 'rsync -avzh root@52.66.202.174:$WORKSPACE/target/*.war /opt/tomcat/apache-tomcat/webapps/'
+				sh 'sudo cp -r /home/ubuntu/*.war /opt/tomcat/apache-tomcat-9.0.68/webapps/'
+				sh 'sudo rm -rf /home/ubuntu/*.war'
 			}
 		}
 	}
