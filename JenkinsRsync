@@ -1,0 +1,28 @@
+pipeline {
+	agent none
+	stages {
+		stage('Checkout') {
+      agent {label 'master'}
+			steps {
+				git branch: 'main', url: 'https://github.com/sudheer76R/java-example.git'
+			}
+		}
+		stage('Static-test') {
+			steps {
+				echo 'Running static tests on code'
+			}
+		}
+		stage('Build') {
+			steps {
+				sh 'mvn clean package'
+			}
+		}
+		stage('Deploy') {
+			steps {
+        agent {label 'tomcatsp'}
+				echo 'Deploying into Dev environment'
+        sh 'cp -r $WORKSPACE/target/*.war /opt/tomcat/apache-tomcat/webapps/'
+			}
+		}
+	}
+}
