@@ -2,16 +2,19 @@ pipeline {
 	agent none
 	stages {
 		stage('Checkout') {
+			agent {label 'master'}
 			steps {
 				git branch: 'main', url: 'https://github.com/sudheer76R/java-example.git'
 			}
 		}
 		stage('Static-test') {
+			agent {label 'master'}
 			steps {
 				echo 'Running static tests on code'
 			}
 		}
 		stage('Build') {
+			agent {label 'master'}
 			steps {
 				sh 'mvn clean package'
 			}
