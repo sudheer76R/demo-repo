@@ -1,27 +1,28 @@
 pipeline {
-	agent none
-	
+	agent none	
 	stages {
-		stage('ParallelJobs') {
+		stage('BuildStage') {
 			parallel {
-			stage('Stage-1A'){
-			     agent {label 'java_node'}
-                             steps {
-				sh 'sleep 120'
-			     }
-			}
-			stage('Stage-1B'){
-			     agent {label 'master'}
-                             steps {
-				sh 'sleep 120'
-			     }
-			}		
+				stage('Stage-1A'){
+					agent {label 'java_node'}
+                    steps {
+					    echo 'executing the task in java_node'
+						sh 'sleep 120'
+					}
+				}
+				stage('Stage-1B'){
+					agent {label 'master'}
+                    steps {
+						echo 'executing the task in master_node'
+						sh 'sleep 120'
+					}
+				}		
 			}
 		}
 		stage('Deploy') {
 			agent {label 'master'}
 			steps {
-       				echo 'sh mkdir master-1'
+				echo 'sh mkdir master-1'
 			}
 		}
 	}
