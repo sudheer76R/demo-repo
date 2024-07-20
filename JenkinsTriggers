@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    triggers {
+        cron('* * * * *')
+    }
+    stages {
+        stage('Trigger') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+#triggers { cron('H */4 * * 1-5') } 
+#triggers { pollSCM('H */4 * * 1-5') } 
+#triggers { upstream(upstreamProjects: 'job1,job2', threshold: hudson.model.Result.SUCCESS) } 
