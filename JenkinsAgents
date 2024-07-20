@@ -1,26 +1,17 @@
-pipeline {
-	agent {label 'java_node'} 
-	stages {
-		stage('Checkout') {
-			steps {
-				git branch: 'main', url: 'https://github.com/sudheer76R/java-example.git'
-			}
-		}
-		stage('Static-test') {
-			steps {
-				echo 'Running static tests on code'
-			}
-		}
-		stage('Build') {
-			steps {
-				sh 'mvn clean package'
-			}
-		}
-		stage('Deploy') {
-			steps {
-				echo 'Deploying into Dev environment'
-        			sh 'cp -r $WORKSPACE/target/*.war /opt/tomcat/apache-tomcat/webapps/'
-			}
-		}
-	}
-}
+pipeline { 
+    agent none 
+    stages { 
+        stage('Stage-1') { 
+            agent {label 'tomcat'} 
+            steps { 
+                sh 'touch tomcat' 
+            } 
+        } 
+        stage('Stage-2') { 
+            agent {label 'master'} 
+            steps { 
+                sh 'touch master' 
+            } 
+        } 
+    } 
+} 
