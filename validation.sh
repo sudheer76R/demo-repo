@@ -8,3 +8,4 @@ echo "$file has no content" >> results.txt
 fi
 done
 cat results.txt
+echo Hi
