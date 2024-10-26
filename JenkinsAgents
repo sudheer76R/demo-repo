@@ -1,17 +1,19 @@
 pipeline { 
-    agent none 
-    stages { 
-        stage('Stage-1') {
-			agent {label 'agent1'}
+	agent none
+	
+	stages {
+		stage ('Stage-1'){
+			agent {lable 'master'} 
 			steps {
-				sh 'touch agent1'
+				sh 'touch master.txt'
 			}
-        } 
-        stage('Stage-2') { 
-			agent {label 'tomcat'}
+		}
+		
+		stage (Stage-2) {
+			agent {lable 'java'}
 			steps {
-				sh 'touch tomcat'
-			}
-        } 
-    } 
+				sh 'mkdir java.txt'
+			}					
+		}
+	}
 } 
