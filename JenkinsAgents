@@ -3,14 +3,14 @@ pipeline {
 	
 	stages {
 		stage ('Stage-1'){
-			agent {lable 'master'} 
+			agent {label 'master'} 
 			steps {
 				sh 'touch master.txt'
 			}
 		}
 		
 		stage (Stage-2) {
-			agent {lable 'java'}
+			agent {label 'java'}
 			steps {
 				sh 'mkdir java.txt'
 			}					
