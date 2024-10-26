@@ -1,29 +1,32 @@
-pipeline {
-	agent none	
+pipeline { 
+	agent none
+	
 	stages {
-		stage('BuildStage') {
+		stage ('Stage-1'){
+			agent {label 'master'} 
+			steps {
+				sh 'touch master.txt'
+			}
+		}
+		
+		stage ('Build-stage') {
+
 			parallel {
-				stage('Stage-1A'){
-					agent {label 'java_node'}
-                    steps {
-					    echo 'executing the task in java_node'
+				stage('stage-1-build'){
+					agent {label 'java'}
+					steps {
+						echo 'Building in stage-1'
 						sh 'sleep 120'
 					}
 				}
-				stage('Stage-1B'){
+				stage('stage-2-build'){
 					agent {label 'master'}
-                    steps {
-						echo 'executing the task in master_node'
+					steps {
+						echo 'Building in stage-1'
 						sh 'sleep 120'
 					}
-				}		
-			}
-		}
-		stage('Deploy') {
-			agent {label 'master'}
-			steps {
-				echo 'sh mkdir master-1'
-			}
+				}				
+			}		
 		}
 	}
 }
