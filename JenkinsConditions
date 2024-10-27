@@ -1,0 +1,31 @@
+pipeline {
+	agent any
+	when  {
+	 brach "main"
+	}
+	stages {
+		stage('Checkout') {
+			steps {
+				echo 'Running Checkout stage'
+			}
+		}
+
+		stage('Test') {
+			steps {
+				echo 'Running Test stage'
+			}
+		}
+
+		stage('Build') {
+			steps {
+				echo 'Running Build stage'
+			}
+		}
+
+		stage('Deploy') {
+			steps {
+				echo 'Running Deploy stage'
+			}
+		}
+}
+}
