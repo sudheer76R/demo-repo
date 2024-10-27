@@ -1,13 +1,13 @@
 pipeline {
 	agent any
-	when  {
-	 branch 'main'
-	}
 	stages {
 		stage('Checkout') {
 			steps {
 				echo 'Running Checkout stage'
 			}
+			when  {
+	 branch 'main'
+	}
 		}
 
 		stage('Test') {
