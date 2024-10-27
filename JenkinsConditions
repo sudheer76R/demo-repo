@@ -1,7 +1,7 @@
 pipeline {
 	agent any
 	when  {
-	 brach "main"
+	 branch "main"
 	}
 	stages {
 		stage('Checkout') {
