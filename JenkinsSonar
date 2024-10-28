@@ -1,0 +1,22 @@
+pipeline{
+    agent {label 'java'}
+    stages{
+       stage('Git Checkout Stage'){
+            steps{
+                git branch: 'main', url: 'https://github.com/sudheer76R/java-example.git'
+            }
+         }        
+       stage('Build Stage'){
+            steps{
+                sh 'sleep 10'
+            }
+         }
+        stage('SonarQube Analysis Stage') {
+            steps{
+                withSonarQubeEnv('sonarqube') { 
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=test_sonar"
+                }
+            }
+        }
+    }
+}
