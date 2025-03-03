@@ -7,5 +7,8 @@ else
 echo "$file has no content" >> results.txt
 fi
 done
+echo "***********************"
+echo "***********************"
 cat results.txt
-echo Hi
+echo "***********************"
+echo "***********************"
