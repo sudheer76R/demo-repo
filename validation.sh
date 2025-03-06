@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo "***********************"
 for file in *; do
 if [ -s $file ]; then
 echo "$file has some content" >> results.txt
