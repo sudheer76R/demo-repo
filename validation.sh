@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "***********************"
+echo "***********************"
 for file in *; do
 if [ -s $file ]; then
 echo "$file has some content" >> results.txt
@@ -11,4 +12,4 @@ echo "***********************"
 echo "***********************"
 cat results.txt
 echo "***********************"
-echo "***********************"
+
