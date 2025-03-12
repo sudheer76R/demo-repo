@@ -1,28 +1,32 @@
 pipeline {
-	agent {label 'tomcat'}
+	agent {	
+    	        label 'build'
+    
+      }
 	stages {
-		stage('Checkout') {
-			steps {
-				git branch: 'main', credentialsId: 'github_cred', url: 'https://github.com/sudheer76R/java-example.git'
-			}
-		}
+		  stage('checkout-stage1') {
+    		           steps {
+      			  git branch: 'main', url: 'https://github.com/Ravichandu-git/java-example.git'
+    		}
+  	}
 
-		stage('Test') {
-			steps {
-				echo 'This is test task. Assume it completed'
-			}
-		}
+		  stage('test') {
+    		           steps {
+     			   echo 'this is a build while testing an artifact itself'
+  		  }
+  	}
 
-		stage('Build') {
-			steps {
-				sh 'mvn clean package'
-			}
-		}
+		  stage('build') {
+    		           steps {
+      			 sh 'mvn clean install'
+   		 }
+  	}
 
-		stage('Deploy') {
-			steps {
-				sh 'sudo cp -r $WORKSPACE/target/*.war /opt/tomcat/apache-tomcat-9.0.68/webapps/'
-			}
-		}
-}
+		  stage('deploy') {
+    		            steps {
+      			    sh 'sudo cp target/*.war /opt/tomcat/apache-tomcat-9.0.68/webapps'
+    		}
+  	}
+     }
+
 }
