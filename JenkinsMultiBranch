@@ -1,0 +1,51 @@
+pipeline {
+	agent any
+	
+	options {
+		retry(3)
+		buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '1', numToKeepStr: '2')
+		timestamps()
+	}
+	triggers {
+		pollSCM('H */4 * * 1-5')
+	}
+	parameters {
+		string defaultValue: 'MR.jenkins', name: 'USER_ID'
+		booleanParam defaultValue: true, name: 'TOGGLE'
+		choice choices: ['DEV', 'TEST', 'PROD'], name: 'ENV'	
+	}
+	stages {
+			stage('Checkout-Stage') {
+						steps {
+							echo "This is checkout stage"
+							echo "Running the job : ${env.JOB_NAME} having build no: ${env.BUILD_ID}"
+							echo "Parameter value of USER_ID is :: ${params.USER_ID}"
+						}
+			}
+
+			stage('Test-stage') {
+						steps {
+							echo 'This is a test case and is taken care while building an artifact itself'
+							echo "value of boolean parameter: ${params.TOGGLE}"
+						}
+			}
+
+			stage('Build-stage') {
+						steps {
+							echo "This is build stage"
+							echo "Value of choice parameter: ${params.ENV}"
+						}
+			}
+
+			stage('Deploy-stage') {
+			            input {
+							message "Hi there!!... Wanna continue further!!!"
+							ok "Yes, I would!!"						
+						}
+						steps {
+						    echo "This is Deploy stage"
+						}
+			}
+
+	}
+}
