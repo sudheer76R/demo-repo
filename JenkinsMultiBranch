@@ -37,15 +37,29 @@ pipeline {
 						}
 			}
 
-			stage('Deploy-stage') {
-			            input {
-							message "Hi there!!... Wanna continue further!!!"
-							ok "Yes, I would!!"						
+			stage('Deploy-stage-main') {
+						when {
+							branch "main"
 						}
 						steps {
-						    echo "This is Deploy stage"
+						    echo "Deploying the code into deveopment environment"
 						}
 			}
-
+			stage('Deploy-stage-artisan') {
+						when {
+							branch "artisan"
+						}
+						steps {
+						    echo "Deploying the code into User-defined environment"
+						}
+			}			
+			stage('Deploy-stage-imps') {
+						when {
+							branch "imps"
+						}
+						steps {
+						    echo "Deploying the code into Testing environment"
+						}
+			}
 	}
 }
