@@ -37,7 +37,7 @@ pipeline {
 						}
 			}
 
-			stage('Deploy-stage') {
+			stage('Deploy-stage-main') {
 						when {
 							branch "main"
 						}
@@ -45,7 +45,7 @@ pipeline {
 						    echo "Deploying the code into deveopment environment"
 						}
 			}
-			stage('Deploy-stage') {
+			stage('Deploy-stage-artisan') {
 						when {
 							branch "artisan"
 						}
@@ -53,7 +53,7 @@ pipeline {
 						    echo "Deploying the code into User-defined environment"
 						}
 			}			
-			stage('Deploy-stage') {
+			stage('Deploy-stage-imps') {
 						when {
 							branch "imps"
 						}
